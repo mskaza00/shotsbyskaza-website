@@ -58,6 +58,21 @@ text-decoration:none;
 
 }
 
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: inherit;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.logo img {
+    width: 45px;
+    height: 45px;
+    object-fit: contain;
+}
 
 
 /* ==========================
