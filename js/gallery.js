@@ -2,77 +2,78 @@
 // SHOTSBYSKAZA AUTO PHOTO GALLERY
 // =================================
 
-
-// Your GitHub information
-
 const username = "mskaza00";
 const repository = "shotsbyskaza-website";
-const folder = "photos";
 
+// Gallery folders
+const galleries = [
+    {
+        folder: "photos/sports",
+        element: "sports-gallery"
+    },
+    {
+        folder: "photos/portraits",
+        element: "portraits-gallery"
+    },
+    {
+        folder: "photos/graphics",
+        element: "graphics-gallery"
+    }
+];
 
+// Load each gallery
+galleries.forEach(loadGallery);
 
-const gallery = document.getElementById("photo-gallery");
+function loadGallery(galleryData) {
 
+    const gallery = document.getElementById(galleryData.element);
 
+    fetch(`https://api.github.com/repos/${username}/${repository}/contents/${galleryData.folder}`)
+        .then(response => response.json())
+        .then(files => {
 
-// Get all photos from GitHub folder
+            files.forEach(file => {
 
-fetch(
-`https://api.github.com/repos/${username}/${repository}/contents/${folder}`
-)
+                if (
+                    file.name.endsWith(".jpg") ||
+                    file.name.endsWith(".jpeg") ||
+                    file.name.endsWith(".png") ||
+                    file.name.endsWith(".webp")
+                ) {
 
+                    const photo = document.createElement("div");
 
-.then(response => response.json())
+                    photo.className = "photo";
 
+                    photo.innerHTML = `
+                        <img
+                            src="${file.download_url}"
+                            alt="${file.name}"
+                            loading="lazy">
+                    `;
 
-.then(files => {
+                    gallery.appendChild(photo);
 
+                }
 
-    files.forEach(file => {
+            });
 
+        })
+        .catch(error => {
+            console.log("Gallery loading error:", error);
+        });
 
-        // Only load image files
+}
 
-        if(
-            file.name.endsWith(".jpg") ||
-            file.name.endsWith(".jpeg") ||
-            file.name.endsWith(".png") ||
-            file.name.endsWith(".webp")
-        ){
+// Dropdown navigation
+const select = document.getElementById("gallery-select");
 
+select.addEventListener("change", function () {
 
-            const photo = document.createElement("div");
+    if (!this.value) return;
 
-            photo.className = "photo";
-
-
-            photo.innerHTML = `
-
-            <img 
-            src="${file.download_url}" 
-            alt="ShotsBySkaza Photography"
-            loading="lazy">
-
-            `;
-
-
-            gallery.appendChild(photo);
-
-
-        }
-
-
+    document.getElementById(this.value).scrollIntoView({
+        behavior: "smooth"
     });
-
-
-})
-
-
-.catch(error => {
-
-console.log(
-"Gallery loading error:",
-error
-);
 
 });
