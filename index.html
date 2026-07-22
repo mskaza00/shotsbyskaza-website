@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shotsbyskaza — Sports &amp; Portrait Photography</title>
+<meta name="description" content="Shotsbyskaza is sports and portrait photograher that finds the moment and covers game coverage for athletes, teams, and programs. Aswell as producing high quality portraits for clients. On and off the field, from sports to portraits high quality photos are always produced.">
+<meta property="og:title" content="Shotsbyskaza — Sports &amp; Action Photography">
+<meta property="og:type" content="website">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%230b0d10'/%3E%3Ccircle cx='50' cy='50' r='27' fill='none' stroke='%23e8a339' stroke-width='7'/%3E%3Ccircle cx='50' cy='50' r='8' fill='%23e8a339'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Space+Mono:wght@400;700&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* ============ TOKENS ============ */
+  :root{
+    --void:#0b0d10;
+    --slate:#171b1f;
+    --slate-2:#20262c;
+    --chalk:#f4f1ea;
+    --chalk-dim:rgba(244,241,234,.66);
+    --chalk-faint:rgba(244,241,234,.4);
+    --floodlight:#e8a339;
+    --floodlight-soft:rgba(232,163,57,.32);
+    --turf:#263b2e;
+    --turf-light:#3a5645;
+    --scoreboard:#b23a2e;
+
+    --font-display:'Big Shoulders Display',sans-serif;
+    --font-body:'Work Sans',sans-serif;
+    --font-mono:'Space Mono',monospace;
+
+    --container:1360px;
+    --header-h:78px;
+  }
+
+  /* ============ RESET ============ */
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--void);
+    color:var(--chalk);
+    font-family:var(--font-body);
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  img,svg{display:block;max-width:100%;}
+  a{color:inherit;text-decoration:none;}
+  ul{list-style:none;}
+  button{font:inherit;color:inherit;background:none;border:none;cursor:pointer;}
+  section{scroll-margin-top:var(--header-h);}
+
+  ::selection{background:var(--floodlight);color:var(--void);}
+
+  :focus-visible{outline:2px solid var(--floodlight);outline-offset:3px;}
+
+  /* ============ GRAIN OVERLAY ============ */
+  .grain{
+    position:fixed;inset:0;z-index:999;pointer-events:none;
+    opacity:.05;mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* ============ LAYOUT HELPERS ============ */
+  .section-inner{max-width:var(--container);margin:0 auto;padding:0 clamp(1.25rem,4vw,3rem);}
+  .eyebrow{
+    font-family:var(--font-mono);font-weight:700;font-size:.72rem;
+    letter-spacing:.22em;text-transform:uppercase;color:var(--floodlight);
+    margin-bottom:1rem;
+  }
+  .section-title{
+    font-family:var(--font-display);font-weight:900;text-transform:uppercase;
+    font-size:clamp(2.2rem,5.5vw,3.75rem);line-height:.95;letter-spacing:.01em;
+    margin-bottom:1.25rem;
+  }
+  .section-intro{max-width:640px;color:var(--chalk-dim);font-size:1.05rem;}
+
+  /* ============ REVEAL ANIMATION ============ */
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease;}
+  .reveal.in-view{opacity:1;transform:translateY(0);}
+
+  /* ============ BUTTONS ============ */
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:.5rem;
+    font-family:var(--font-mono);font-weight:700;font-size:.8rem;
+    letter-spacing:.12em;text-transform:uppercase;
+    padding:1rem 1.75rem;border-radius:2px;transition:all .25s ease;
+    white-space:nowrap;
+  }
+  .btn-primary{background:var(--floodlight);color:var(--void);}
+  .btn-primary:hover{background:#f3b558;transform:translateY(-2px);box-shadow:0 8px 24px var(--floodlight-soft);}
+  .btn-ghost{border:1.5px solid var(--chalk-faint);color:var(--chalk);}
+  .btn-ghost:hover{border-color:var(--floodlight);color:var(--floodlight);}
+
+  /* ============ HEADER ============ */
+  .site-header{
+    position:fixed;top:0;left:0;right:0;z-index:500;height:var(--header-h);
+    display:flex;align-items:center;
+    background:rgba(11,13,16,.72);backdrop-filter:blur(10px);
+    border-bottom:1px solid rgba(244,241,234,.08);
+    transition:background .3s ease;
+  }
+  .site-header.scrolled{background:rgba(11,13,16,.92);}
+  .header-inner{
+    width:100%;max-width:var(--container);margin:0 auto;
+    padding:0 clamp(1.25rem,4vw,3rem);
+    display:flex;align-items:center;justify-content:space-between;gap:1.5rem;
+  }
+  .logo{
+    font-family:var(--font-display);font-weight:800;text-transform:uppercase;
+    font-size:1.35rem;letter-spacing:.04em;
+  }
+  .main-nav{display:flex;gap:2.25rem;}
+  .main-nav a{
+    font-family:var(--font-mono);font-size:.78rem;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--chalk-dim);position:relative;padding:.25rem 0;
+  }
+  .main-nav a::after{
+    content:"";position:absolute;left:0;bottom:0;width:0;height:1px;
+    background:var(--floodlight);transition:width .25s ease;
+  }
+  .main-nav a:hover{color:var(--chalk);}
+  .main-nav a:hover::after{width:100%;}
+
+  .header-actions{display:flex;align-items:center;gap:1.1rem;}
+  .icon-link{width:20px;height:20px;color:var(--chalk-dim);transition:color .2s ease;}
+  .icon-link:hover{color:var(--floodlight);}
+  .nav-toggle{display:none;width:24px;height:24px;color:var(--chalk);}
+
+  /* ============ HERO ============ */
+  .hero{
+    position:relative;min-height:100svh;display:flex;align-items:center;
+    padding-top:var(--header-h);overflow:hidden;
+  }
+  .hero-glow{
+    position:absolute;inset:0;pointer-events:none;z-index:0;
+    background:
+      radial-gradient(560px 420px at 88% 8%, var(--floodlight-soft), transparent 70%),
+      radial-gradient(480px 480px at 6% 96%, rgba(58,86,69,.35), transparent 70%);
+  }
+  .hero-inner{position:relative;z-index:1;max-width:var(--container);margin:0 auto;padding:4rem clamp(1.25rem,4vw,3rem) 3rem;width:100%;}
+  .hero-title{
+    font-family:var(--font-display);font-weight:900;text-transform:uppercase;
+    font-size:clamp(3rem,10vw,7.25rem);line-height:.92;letter-spacing:.005em;
+    max-width:16ch;
+  }
+  .hero-title .accent{color:var(--floodlight);}
+  .hero-sub{
+    margin-top:1.75rem;max-width:540px;font-size:1.1rem;color:var(--chalk-dim);
+  }
+  .hero-cta{margin-top:2.5rem;display:flex;flex-wrap:wrap;gap:1rem;}
+
+  /* ============ TICKER ============ */
+  .ticker{
+    background:var(--slate);border-top:1px solid rgba(244,241,234,.08);
+    border-bottom:1px solid rgba(244,241,234,.08);overflow:hidden;
+  }
+  .ticker-track{display:flex;width:max-content;padding:.9rem 0;animation:scrollTicker 32s linear infinite;}
+  .ticker-track span{
+    font-family:var(--font-mono);font-size:.82rem;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--chalk-dim);padding:0 1.5rem;white-space:nowrap;
+  }
+  .ticker-track span.pip{color:var(--floodlight);}
+  @keyframes scrollTicker{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+
+  /* ============ PORTFOLIO / GALLERY ============ */
+  .portfolio{padding:7rem 0;}
+  .gallery{
+    margin-top:3rem;display:grid;grid-template-columns:repeat(4,1fr);
+    grid-auto-rows:210px;grid-auto-flow:dense;gap:.9rem;
+  }
+  .frame--wide{grid-column:span 2;}
+  .frame--tall{grid-row:span 2;}
+  .frame{
+    position:relative;overflow:hidden;background:var(--slate);cursor:default;
+  }
+  .frame-bg{
+    position:absolute;inset:0;
+    background:
+      repeating-linear-gradient(115deg, rgba(244,241,234,.05) 0 2px, transparent 2px 26px),
+      radial-gradient(120% 140% at 15% 0%, var(--slate-2), var(--void) 75%);
+    transition:transform .6s ease;
+  }
+  .frame:hover .frame-bg,.frame:focus-within .frame-bg{transform:scale(1.04);}
+  .frame-icon{
+    position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+    color:var(--chalk-faint);width:34%;height:34%;margin:auto;transition:opacity .3s ease;
+  }
+  .frame:hover .frame-icon,.frame:focus-within .frame-icon{opacity:0;}
+  .frame-label{
+    position:absolute;left:14px;bottom:14px;font-family:var(--font-mono);
+    font-size:.72rem;letter-spacing:.1em;color:var(--chalk-faint);transition:color .3s ease;
+  }
+  .frame:hover .frame-label,.frame:focus-within .frame-label{color:var(--floodlight);}
+
+  .fc{position:absolute;width:22px;height:22px;opacity:0;transition:opacity .3s ease, top .3s ease, left .3s ease, right .3s ease, bottom .3s ease;}
+  .fc-tl{top:22px;left:22px;border-top:2px solid var(--floodlight);border-left:2px solid var(--floodlight);}
+  .fc-tr{top:22px;right:22px;border-top:2px solid var(--floodlight);border-right:2px solid var(--floodlight);}
+  .fc-bl{bottom:22px;left:22px;border-bottom:2px solid var(--floodlight);border-left:2px solid var(--floodlight);}
+  .fc-br{bottom:22px;right:22px;border-bottom:2px solid var(--floodlight);border-right:2px solid var(--floodlight);}
+  .frame:hover .fc,.frame:focus-within .fc{opacity:1;}
+  .frame:hover .fc-tl,.frame:focus-within .fc-tl{top:12px;left:12px;}
+  .frame:hover .fc-tr,.frame:focus-within .fc-tr{top:12px;right:12px;}
+  .frame:hover .fc-bl,.frame:focus-within .fc-bl{bottom:12px;left:12px;}
+  .frame:hover .fc-br,.frame:focus-within .fc-br{bottom:12px;right:12px;}
+
+  .frame-caption{
+    position:absolute;left:0;right:0;bottom:0;padding:1.1rem 1.1rem;
+    transform:translateY(100%);opacity:0;transition:transform .35s ease,opacity .35s ease;
+    background:linear-gradient(0deg, rgba(11,13,16,.88), transparent);
+  }
+  .frame:hover .frame-caption,.frame:focus-within .frame-caption{transform:translateY(0);opacity:1;}
+  .fc-add{font-family:var(--font-mono);font-weight:700;font-size:.8rem;letter-spacing:.08em;color:var(--floodlight);text-transform:uppercase;}
+  .fc-exif{font-family:var(--font-mono);font-size:.72rem;color:var(--chalk-dim);margin-top:.3rem;}
+
+  /* ============ ABOUT ============ */
+  .about{padding:7rem 0;background:var(--slate);}
+  .about-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:clamp(2rem,6vw,5rem);align-items:center;}
+  .portrait-placeholder{
+    aspect-ratio:4/5;background:var(--void);position:relative;overflow:hidden;
+    border:1px dashed rgba(244,241,234,.22);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;
+  }
+  .portrait-placeholder .frame-icon{position:static;width:64px;height:64px;opacity:.35;margin:0;}
+  .portrait-placeholder p{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.14em;color:var(--chalk-faint);text-transform:uppercase;}
+  .about-copy p{color:var(--chalk-dim);margin-top:1.1rem;font-size:1.05rem;max-width:56ch;}
+  .about-copy p:first-of-type{margin-top:0;}
+  .about-copy strong{color:var(--chalk);font-weight:600;}
+
+  .stat-row{display:flex;gap:clamp(1.5rem,4vw,3rem);margin-top:2.5rem;flex-wrap:wrap;}
+  .stat-num{display:block;font-family:var(--font-mono);font-weight:700;font-size:2rem;color:var(--floodlight);}
+  .stat-label{display:block;font-family:var(--font-mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--chalk-faint);margin-top:.35rem;}
+
+  /* ============ CONTACT ============ */
+  .contact{padding:7rem 0 6rem;}
+  .contact-block{
+    margin-top:2.75rem;display:flex;flex-wrap:wrap;align-items:center;gap:2.5rem;
+    padding-top:2.5rem;border-top:1px solid rgba(244,241,234,.12);
+  }
+  .contact-details{display:flex;flex-direction:column;gap:.6rem;font-family:var(--font-mono);font-size:.9rem;color:var(--chalk-dim);}
+  .contact-details a:hover{color:var(--floodlight);}
+
+  /* ============ FOOTER ============ */
+  .site-footer{border-top:1px solid rgba(244,241,234,.1);padding:2.25rem 0;}
+  .footer-inner{
+    max-width:var(--container);margin:0 auto;padding:0 clamp(1.25rem,4vw,3rem);
+    display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1.25rem;
+  }
+  .footer-inner,.footer-inner *{font-family:var(--font-mono);font-size:.75rem;letter-spacing:.06em;color:var(--chalk-faint);}
+  .footer-links{display:flex;gap:1.5rem;}
+  .footer-links a:hover,.footer-social a:hover{color:var(--floodlight);}
+  .footer-social{display:flex;gap:1rem;}
+  .footer-social svg{width:16px;height:16px;}
+
+  /* ============ RESPONSIVE ============ */
+  @media (max-width:900px){
+    .gallery{grid-template-columns:repeat(2,1fr);grid-auto-rows:190px;}
+    .about-grid{grid-template-columns:1fr;}
+    .portrait-placeholder{max-width:340px;}
+  }
+  @media (max-width:760px){
+    .main-nav{
+      position:fixed;top:var(--header-h);left:0;right:0;bottom:0;
+      background:var(--void);flex-direction:column;gap:0;
+      padding:1rem clamp(1.25rem,4vw,3rem);
+      transform:translateX(100%);transition:transform .35s ease;
+      z-index:400;
+    }
+    .main-nav.open{transform:translateX(0);}
+    .main-nav a{padding:1.1rem 0;border-bottom:1px solid rgba(244,241,234,.08);font-size:.95rem;}
+    .nav-toggle{display:block;}
+    .header-actions .icon-link{display:none;}
+  }
+  @media (max-width:600px){
+    .gallery{grid-template-columns:1fr;}
+    .frame--wide,.frame--tall{grid-column:span 1;grid-row:span 1;}
+    .hero-cta{flex-direction:column;align-items:stretch;}
+    .contact-block{flex-direction:column;align-items:flex-start;}
+  }
+
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;}
+    html{scroll-behavior:auto;}
+    .reveal{opacity:1;transform:none;}
+  }
+</style>
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+
+<header class="site-header" id="site-header">
+  <div class="header-inner">
+    <a href="#top" class="logo">Shotsbyskaza</a>
+    <nav class="main-nav" id="main-nav">
+      <a href="#portfolio">Portfolio</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="header-actions">
+      <!-- EDIT: point these at your real Instagram + email -->
+      <a class="icon-link" href="https://instagram.com/shotsbyskaza" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.3" cy="6.7" r="1.1" fill="currentColor" stroke="none"/></svg>
+      </a>
+      <a class="icon-link" href="mailto:hello@shotsbyskaza.com" aria-label="Email">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 6.5l9 6.5 9-6.5"/></svg>
+      </a>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="main-nav">
+        <svg id="icon-burger" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        <svg id="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="display:none"><line x1="5" y1="5" x2="19" y2="19"/><line x1="19" y1="5" x2="5" y2="19"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="hero-glow" aria-hidden="true"></div>
+    <div class="hero-inner">
+      <p class="eyebrow reveal">Sports &amp; Action Photography</p>
+      <h1 class="hero-title reveal">The moment<br>before the<br><span class="accent">roar.</span></h1>
+      <p class="hero-sub reveal">Game-day photography that finds the split second before the scoreboard changes — for athletes, teams, and programs who want it kept.</p>
+      <div class="hero-cta reveal">
+        <a href="#portfolio" class="btn btn-primary">View the Gallery</a>
+        <a href="#contact" class="btn btn-ghost">Book a Season</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-track">
+      <span>Football</span><span class="pip">/</span><span>Baseball</span><span class="pip">/</span><span>Softball</span><span class="pip">/</span><span>Track &amp; Field</span><span class="pip">/</span><span>Lacrosse</span><span class="pip">/</span><span>Hockey</span><span class="pip">/</span><span>Basketball</span><span class="pip">/</span>
+      <span>Football</span><span class="pip">/</span><span>Baseball</span><span class="pip">/</span><span>Softball</span><span class="pip">/</span><span>Track &amp; Field</span><span class="pip">/</span><span>Lacrosse</span><span class="pip">/</span><span>Hockey</span><span class="pip">/</span><span>Basketball</span><span class="pip">/</span>
+    </div>
+  </div>
+
+  <section id="portfolio" class="portfolio">
+    <div class="section-inner">
+      <p class="eyebrow reveal">Portfolio</p>
+      <h2 class="section-title reveal">Selected frames</h2>
+      <p class="section-intro reveal">A running archive of games, meets, and matches. This grid is wired up and ready — swap each frame below for one of your own shots.</p>
+
+      <div class="gallery">
+        <!-- EDIT: replace each .frame-bg with your photo, e.g. style="background-image:url('your-photo.jpg')" -->
+        <div class="frame frame--wide reveal" tabindex="0">
+          <div class="frame-bg"></div>
+          <div class="frame-icon">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M6 16a3 3 0 013-3h4l2.4-3.6a2 2 0 011.7-.9h9.8a2 2 0 011.7.9L31 13h4a3 3 0 013 3v18a3 3 0 01-3 3H9a3 3 0 01-3-3V16z"/><circle cx="24" cy="25" r="7.5"/><circle cx="24" cy="25" r="3"/></svg>
+          </div>
+          <span class="fc fc-tl"></span><span class="fc fc-tr"></span><span class="fc fc-bl"></span><span class="fc fc-br"></span>
+          <p class="frame-label">Frame 001</p>
+          <div class="frame-caption"><p class="fc-add">+ Add photo</p><p class="fc-exif">1/2000s · ƒ/2.8 · ISO 800</p></div>
+        </div>
+
+        <div class="frame frame--tall reveal" tabindex="0">
+          <div class="frame-bg"></div>
+          <div class="frame-icon"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M6 16a3 3 0 013-3h4l2.4-3.6a2 2 0 011.7-.9h9.8a2 2 0 011.7.9L31 13h4a3 3 0 013 3v18a3 3 0 01-3 3H9a3 3 0 01-3-3V16z"/><circle cx="24" cy="25" r="7.5"/><circle cx="24" cy="25" r="3"/></svg></div>
+          <span class="fc fc-tl"></span><span class="fc fc-tr"></span><span class="fc fc-bl"></span><span class="fc fc-br"></span>
+          <p class="frame-label">Frame 002</p>
+          <div class="frame-caption"><p class="fc-add">+ Add photo</p><p class="fc-exif">1/1600s · ƒ/2.8 · ISO 640</p></div>
+        </div>
+
+        <div class="frame reveal" tabindex="0">
+          <div class="frame-bg"></div>
+          <div class="frame-icon"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M6 16a3 3 0 013-3h4l2.4-3.6a2 2 0 011.7-.9h9.8a2 2 0 011.7.9L31 13h4a3 3 0 013 3v18a3 3 0 01-3 3H9a3 3 0 01-3-3V16z"/><circle cx="24" cy="25" r="7.5"/><circle cx="24" cy="25" r="3"/></svg></div>
+          <span class="fc fc-tl"></span><span class="fc fc-tr"></span><span class="fc fc-bl"></span><span class="fc fc-br"></span>
+          <p class="frame-label">Frame 003</p>
+          <div class="frame-caption"><p class="fc-add">+ Add photo</p><p class="fc-exif">1/2500s · ƒ/3.2 · ISO 1000</p></div>
+        </div>
+
+        <div class="frame reveal" tabindex="0">
+          <div class="frame-bg"></div>
+          <div class="frame-icon"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M6 16a3 3 0 013-3h4l2.4-3.6a2 2 0 011.7-.9h9.8a2 2 0 011.7.9L31 13h4a3 3 0 013 3v18a3 3 0 01-3 3H9a3 3 0 01-3-3V16z"/><circle cx="24" cy="25" r="7.5"/><circle cx="24" cy="25" r="3"/></svg></div>
+          <span class="fc fc-tl"></span><span class="fc fc-tr"></span><span class="fc fc-bl"></span><span class="fc fc-br"></span>
+          <p class="frame-label">Frame 004</p>
+          <div class="frame-caption"><p class="fc-add">+ Add photo</p><p class="fc-exif">1/2000s · ƒ/4 · ISO 500</p></div>
+        </div>
+
+        <div class="frame reveal" tabindex="0">
+          <div class="frame-bg"></div>
+          <div class="frame-icon"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M6 16a3 3 0 013-3h4l2.4-3.6a2 2 0 011.7-.9h9.8a2 2 0 011.7.9L31 13h4a3 3 0 013 3v18a3 3 0 01-3 3H9a3 3 0 01-3-3V16z"/><circle cx="24" cy="25" r="7.5"/><circle cx="24" cy="25" r="3"/></svg></div>
+          <span class="fc fc-tl"></span><span class="fc fc-tr"></span><span class="fc fc-bl"></span><span class="fc fc-br"></span>
+          <p class="frame-label">Frame 005</p>
+          <div class="frame-caption"><p class="fc-add">+ Add photo</p><p class="fc-exif">1/3200s · ƒ/2.8 · ISO 800</p></div>
+        </div>
+
+        <div class="frame frame--wide reveal" tabindex="0">
+          <div class="frame-bg"></div>
+          <div class="frame-icon"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M6 16a3 3 0 013-3h4l2.4-3.6a2 2 0 011.7-.9h9.8a2 2 0 011.7.9L31 13h4a3 3 0 013 3v18a3 3 0 01-3 3H9a3 3 0 01-3-3V16z"/><circle cx="24" cy="25" r="7.5"/><circle cx="24" cy="25" r="3"/></svg></div>
+          <span class="fc fc-tl"></span><span class="fc fc-tr"></span><span class="fc fc-bl"></span><span class="fc fc-br"></span>
+          <p class="frame-label">Frame 006</p>
+          <div class="frame-caption"><p class="fc-add">+ Add photo</p><p class="fc-exif">1/2000s · ƒ/2.5 · ISO 1250</p></div>
+        </div>
+
+        <div class="frame reveal" tabindex="0">
+          <div class="frame-bg"></div>
+          <div class="frame-icon"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M6 16a3 3 0 013-3h4l2.4-3.6a2 2 0 011.7-.9h9.8a2 2 0 011.7.9L31 13h4a3 3 0 013 3v18a3 3 0 01-3 3H9a3 3 0 01-3-3V16z"/><circle cx="24" cy="25" r="7.5"/><circle cx="24" cy="25" r="3"/></svg></div>
+          <span class="fc fc-tl"></span><span class="fc fc-tr"></span><span class="fc fc-bl"></span><span class="fc fc-br"></span>
+          <p class="frame-label">Frame 007</p>
+          <div class="frame-caption"><p class="fc-add">+ Add photo</p><p class="fc-exif">1/1000s · ƒ/4.5 · ISO 400</p></div>
+        </div>
+
+        <div class="frame reveal" tabindex="0">
+          <div class="frame-bg"></div>
+          <div class="frame-icon"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M6 16a3 3 0 013-3h4l2.4-3.6a2 2 0 011.7-.9h9.8a2 2 0 011.7.9L31 13h4a3 3 0 013 3v18a3 3 0 01-3 3H9a3 3 0 01-3-3V16z"/><circle cx="24" cy="25" r="7.5"/><circle cx="24" cy="25" r="3"/></svg></div>
+          <span class="fc fc-tl"></span><span class="fc fc-tr"></span><span class="fc fc-bl"></span><span class="fc fc-br"></span>
+          <p class="frame-label">Frame 008</p>
+          <div class="frame-caption"><p class="fc-add">+ Add photo</p><p class="fc-exif">1/2000s · ƒ/2.8 · ISO 900</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" class="about">
+    <div class="section-inner about-grid">
+      <div class="portrait-placeholder reveal">
+        <!-- EDIT: swap this block for an <img> of your headshot -->
+        <div class="frame-icon"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M6 16a3 3 0 013-3h4l2.4-3.6a2 2 0 011.7-.9h9.8a2 2 0 011.7.9L31 13h4a3 3 0 013 3v18a3 3 0 01-3 3H9a3 3 0 01-3-3V16z"/><circle cx="24" cy="25" r="7.5"/><circle cx="24" cy="25" r="3"/></svg></div>
+        <p>Add headshot</p>
+      </div>
+      <div class="about-copy reveal">
+        <p class="eyebrow">About</p>
+        <h2 class="section-title">Behind the lens</h2>
+        <!-- EDIT: this whole block is a starting point — swap in your own details -->
+        <p>I'm <strong>[Your Name]</strong> — the photographer behind Shotsbyskaza. I chase the split second before the scoreboard changes: the dive, the release, the moment a game turns.</p>
+        <p>Based in <strong>[Your City, State]</strong>, covering <strong>[the sports/teams you shoot]</strong> from the sideline, the end zone, and everywhere the play breaks in between. Available for game coverage, senior nights, and team season packages.</p>
+        <div class="stat-row">
+          <div class="stat"><span class="stat-num">XX</span><span class="stat-label">Game days shot</span></div>
+          <div class="stat"><span class="stat-num">XX</span><span class="stat-label">Sports covered</span></div>
+          <div class="stat"><span class="stat-num">XX</span><span class="stat-label">Seasons</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact">
+    <div class="section-inner">
+      <p class="eyebrow reveal">Contact</p>
+      <h2 class="section-title reveal">Book a shoot</h2>
+      <p class="section-intro reveal">Team seasons, senior nights, tournaments, meets — if there's a game, there's a shot. Reach out and let's talk coverage.</p>
+      <div class="contact-block reveal">
+        <!-- EDIT: replace with your real email -->
+        <a href="mailto:hello@shotsbyskaza.com" class="btn btn-primary">Email Shotsbyskaza</a>
+        <div class="contact-details">
+          <a href="mailto:hello@shotsbyskaza.com">hello@shotsbyskaza.com</a>
+          <a href="https://instagram.com/shotsbyskaza" target="_blank" rel="noopener">@shotsbyskaza</a>
+          <span>[Your City], [State]</span>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <span>© 2026 Shotsbyskaza</span>
+    <div class="footer-links">
+      <a href="#portfolio">Portfolio</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="footer-social">
+      <a href="https://instagram.com/shotsbyskaza" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.3" cy="6.7" r="1.1" fill="currentColor" stroke="none"/></svg>
+      </a>
+      <a href="mailto:hello@shotsbyskaza.com" aria-label="Email">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 6.5l9 6.5 9-6.5"/></svg>
+      </a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Header scroll state
+  var header = document.getElementById('site-header');
+  window.addEventListener('scroll', function(){
+    header.classList.toggle('scrolled', window.scrollY > 12);
+  });
+
+  // Mobile nav toggle
+  var toggle = document.getElementById('nav-toggle');
+  var nav = document.getElementById('main-nav');
+  var burger = document.getElementById('icon-burger');
+  var close = document.getElementById('icon-close');
+  function setNav(open){
+    nav.classList.toggle('open', open);
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    burger.style.display = open ? 'none' : 'block';
+    close.style.display = open ? 'block' : 'none';
+  }
+  toggle.addEventListener('click', function(){ setNav(!nav.classList.contains('open')); });
+  nav.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', function(){ setNav(false); }); });
+
+  // Scroll reveal
+  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var reveals = document.querySelectorAll('.reveal');
+  if (prefersReduced || !('IntersectionObserver' in window)) {
+    reveals.forEach(function(el){ el.classList.add('in-view'); });
+  } else {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    reveals.forEach(function(el){ io.observe(el); });
+  }
+</script>
+</body>
+</html>
