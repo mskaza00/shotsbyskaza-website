@@ -1,22 +1,13 @@
-// ===============================
-// SHOTSBYSKAZA AUTO GALLERY
-// ===============================
+// =================================
+// SHOTSBYSKAZA AUTO PHOTO GALLERY
+// =================================
 
 
-// Add your photos here
-// No aspect ratios needed
-// Just upload photos and add the filename
+// Your GitHub information
 
-
-const photos = [
-
-    "photo1.jpg",
-    "photo2.jpg",
-    "photo3.jpg",
-    "photo4.jpg",
-    "photo5.jpg"
-
-];
+const username = "mskaza00";
+const repository = "shotsbyskaza-website";
+const folder = "photos";
 
 
 
@@ -24,25 +15,64 @@ const gallery = document.getElementById("photo-gallery");
 
 
 
-photos.forEach(function(photo){
+// Get all photos from GitHub folder
+
+fetch(
+`https://api.github.com/repos/${username}/${repository}/contents/${folder}`
+)
 
 
-    const container = document.createElement("div");
-
-    container.className = "photo";
+.then(response => response.json())
 
 
-    const image = document.createElement("img");
-
-    image.src = "photos/" + photo;
-
-    image.alt = "ShotsBySkaza Photography";
+.then(files => {
 
 
-    container.appendChild(image);
+    files.forEach(file => {
 
 
-    gallery.appendChild(container);
+        // Only load image files
 
+        if(
+            file.name.endsWith(".jpg") ||
+            file.name.endsWith(".jpeg") ||
+            file.name.endsWith(".png") ||
+            file.name.endsWith(".webp")
+        ){
+
+
+            const photo = document.createElement("div");
+
+            photo.className = "photo";
+
+
+            photo.innerHTML = `
+
+            <img 
+            src="${file.download_url}" 
+            alt="ShotsBySkaza Photography"
+            loading="lazy">
+
+            `;
+
+
+            gallery.appendChild(photo);
+
+
+        }
+
+
+    });
+
+
+})
+
+
+.catch(error => {
+
+console.log(
+"Gallery loading error:",
+error
+);
 
 });
