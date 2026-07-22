@@ -1,0 +1,489 @@
+/* =========================
+   SHOTSBYSKAZA STYLE
+========================= */
+
+
+:root{
+
+    --black:#090b0f;
+    --dark:#12161c;
+    --white:#f5f3ed;
+    --gold:#e8a339;
+    --gray:#a9adb5;
+
+}
+
+
+
+*{
+
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+
+}
+
+
+
+html{
+
+    scroll-behavior:smooth;
+
+}
+
+
+
+body{
+
+    background:var(--black);
+    color:var(--white);
+
+    font-family:Arial, Helvetica, sans-serif;
+
+    line-height:1.6;
+
+}
+
+
+
+a{
+
+    color:inherit;
+    text-decoration:none;
+
+}
+
+
+
+img{
+
+    max-width:100%;
+    display:block;
+
+}
+
+
+
+/* =========================
+        HEADER
+========================= */
+
+
+header{
+
+    position:fixed;
+
+    top:0;
+    left:0;
+
+    width:100%;
+
+    z-index:100;
+
+    background:rgba(9,11,15,.85);
+
+    backdrop-filter:blur(12px);
+
+    border-bottom:1px solid rgba(255,255,255,.1);
+
+}
+
+
+
+.nav{
+
+    max-width:1400px;
+
+    margin:auto;
+
+    padding:25px 40px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+}
+
+
+
+.logo{
+
+    font-size:30px;
+
+    font-weight:900;
+
+    text-transform:uppercase;
+
+}
+
+
+
+nav{
+
+    display:flex;
+
+    gap:30px;
+
+}
+
+
+
+nav a{
+
+    color:var(--gray);
+
+    text-transform:uppercase;
+
+    letter-spacing:2px;
+
+    font-size:13px;
+
+    transition:.3s;
+
+}
+
+
+
+nav a:hover{
+
+    color:var(--gold);
+
+}
+
+
+
+/* =========================
+        HERO
+========================= */
+
+
+.hero{
+
+    min-height:90vh;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    padding:120px 40px 50px;
+
+    max-width:1400px;
+
+    margin:auto;
+
+}
+
+
+
+.hero h1{
+
+    font-size:clamp(70px,10vw,140px);
+
+    line-height:.85;
+
+    text-transform:uppercase;
+
+    font-weight:900;
+
+}
+
+
+
+.hero p{
+
+    margin-top:30px;
+
+    max-width:600px;
+
+    font-size:22px;
+
+    color:var(--gray);
+
+}
+
+
+
+/* =========================
+        GALLERY
+========================= */
+
+
+#gallery{
+
+    padding:80px 40px;
+
+    max-width:1500px;
+
+    margin:auto;
+
+}
+
+
+
+#gallery h2,
+.about h2,
+.contact h2{
+
+    font-size:60px;
+
+    text-transform:uppercase;
+
+    margin-bottom:40px;
+
+}
+
+
+
+/*
+ AUTOMATIC PHOTO SIZING
+ NO INDIVIDUAL RATIOS NEEDED
+*/
+
+
+.gallery{
+
+    columns:4 300px;
+
+    column-gap:18px;
+
+}
+
+
+
+.photo{
+
+    break-inside:avoid;
+
+    margin-bottom:18px;
+
+    overflow:hidden;
+
+    border-radius:4px;
+
+}
+
+
+
+.photo img{
+
+    width:100%;
+
+    height:auto;
+
+    transition:.5s;
+
+}
+
+
+
+.photo:hover img{
+
+    transform:scale(1.05);
+
+}
+/* =========================
+        ABOUT
+========================= */
+
+
+.about{
+
+    max-width:1100px;
+
+    margin:auto;
+
+    padding:100px 40px;
+
+    background:var(--dark);
+
+}
+
+
+
+.about p{
+
+    color:var(--gray);
+
+    font-size:20px;
+
+    max-width:800px;
+
+    margin-bottom:25px;
+
+}
+
+
+
+
+/* =========================
+        CONTACT
+========================= */
+
+
+.contact{
+
+    max-width:1100px;
+
+    margin:auto;
+
+    padding:100px 40px;
+
+}
+
+
+
+.contact p{
+
+    color:var(--gray);
+
+    font-size:20px;
+
+    margin-bottom:25px;
+
+}
+
+
+
+.contact a{
+
+    color:var(--gold);
+
+    font-size:22px;
+
+}
+
+
+
+
+/* =========================
+        FOOTER
+========================= */
+
+
+footer{
+
+    padding:40px;
+
+    text-align:center;
+
+    border-top:1px solid rgba(255,255,255,.1);
+
+    color:var(--gray);
+
+}
+
+
+
+
+/* =========================
+        MOBILE
+========================= */
+
+
+@media(max-width:900px){
+
+
+.nav{
+
+    padding:20px;
+
+}
+
+
+
+.hero{
+
+    padding:120px 20px 50px;
+
+}
+
+
+
+.hero h1{
+
+    font-size:65px;
+
+}
+
+
+
+nav{
+
+    gap:15px;
+
+}
+
+
+
+#gallery,
+.contact,
+.about{
+
+    padding-left:20px;
+
+    padding-right:20px;
+
+}
+
+
+
+#gallery h2,
+.about h2,
+.contact h2{
+
+    font-size:45px;
+
+}
+
+
+}
+
+
+
+@media(max-width:600px){
+
+
+.logo{
+
+    font-size:24px;
+
+}
+
+
+
+nav a{
+
+    font-size:11px;
+
+}
+
+
+
+.hero h1{
+
+    font-size:52px;
+
+}
+
+
+
+.hero p{
+
+    font-size:17px;
+
+}
+
+
+
+.gallery{
+
+    columns:1;
+
+}
+
+
+}
