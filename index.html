@@ -8,7 +8,7 @@
 
 <title>ShotsBySkaza | Photography</title>
 
-<meta name="description" content="ShotsBySkaza photography gallery">
+<meta name="description" content="ShotsBySkaza Photography">
 
 <link rel="icon" type="image/png" href="shotsbyskazalogo.png">
 
@@ -19,7 +19,6 @@
 
 <body>
 
-
 <div class="grain"></div>
 
 
@@ -28,22 +27,15 @@
 <div class="header-inner">
 
 <a class="logo" href="#">
-
 <img src="shotsbyskazalogo.png" alt="ShotsBySkaza Logo">
-
 <span>ShotsBySkaza</span>
-
 </a>
 
 
 <nav>
-
 <a href="#gallery">Gallery</a>
-
-<a href="#about">About me!</a>
-
+<a href="#about">About</a>
 <a href="#contact">Contact</a>
-
 </nav>
 
 
@@ -62,22 +54,66 @@
 <div class="section-header">
 
 <p class="eyebrow">
-
+Portfolio
 </p>
 
-
 <h1>
-
+My Work
 </h1>
 
 
+<select id="gallery-select">
+
+<option value="">
+Jump To Gallery
+</option>
+
+<option value="sports">
+Sports
+</option>
+
+<option value="portraits">
+Portraits
+</option>
+
+<option value="graphics">
+Graphic Designs
+</option>
+
+</select>
+
+
 </div>
 
 
 
-<div id="photo-gallery" class="gallery">
+<section id="sports" class="gallery-category">
 
-</div>
+<h2>Sports</h2>
+
+<div id="sports-gallery" class="gallery"></div>
+
+</section>
+
+
+
+<section id="portraits" class="gallery-category">
+
+<h2>Portraits</h2>
+
+<div id="portraits-gallery" class="gallery"></div>
+
+</section>
+
+
+
+<section id="graphics" class="gallery-category">
+
+<h2>Graphic Designs</h2>
+
+<div id="graphics-gallery" class="gallery"></div>
+
+</section>
 
 
 
@@ -85,10 +121,8 @@
 
 
 
+
 <section id="about" class="about">
-
-
-<div class="about-inner">
 
 
 <p class="eyebrow">
@@ -102,20 +136,13 @@ Behind The Lens
 
 
 <p>
-
-I'm Matthew Skaza, a 17-year-old photographer based in Western Massachusetts, specifically the Chicopee area. I specialize in sports photography while also capturing portraits and other special moments. With over two years of experience behind the camera, I enjoy creating images that tell meaningful stories and preserve memories that matter to people.
-
+I'm Matthew Skaza, a 17-year-old photographer based in Western Massachusetts. I specialize in sports photography while also capturing portraits and creative moments. With over two years of experience behind the camera, I focus on creating images that preserve meaningful moments.
 </p>
 
 
 <p>
-
-When I'm not taking photos, I'm a student-athlete at Chicopee Comprehensive High School and a football captain. My experience as an athlete gives me a unique perspective when capturing sports, allowing me to understand the emotion, dedication, and intensity behind every moment. From rivalry games and state championships to couples shoots and unforgettable events, I use my camera to capture moments that people can look back on for years to come.
-
+As a student-athlete and football captain, I bring an athlete's perspective into sports photography by understanding the emotion, preparation, and intensity behind every moment.
 </p>
-
-
-</div>
 
 
 </section>
@@ -126,22 +153,14 @@ When I'm not taking photos, I'm a student-athlete at Chicopee Comprehensive High
 <section id="contact" class="contact">
 
 
-<div class="contact-inner">
-
-
 <p class="eyebrow">
 Contact
 </p>
 
 
 <h2>
-Contact Me!
+Book A Shoot
 </h2>
-
-
-<h3>
-Book A Shoot:
-</h3>
 
 
 <p>
@@ -150,13 +169,9 @@ Interested in photography coverage?
 
 
 <p>
-  <a href="mailto:mskaza.business@gmail.com" style="color: #3647da;">
-    mskaza.business@gmail.com
-  </a>
-</p>
-
-<p>
-I'm usually most active on my Instagram account, where I share my latest work and updates. However, my email is always open for inquiries, collaborations, and photography opportunities.
+<a class="email" href="mailto:mskaza.business@gmail.com">
+mskaza.business@gmail.com
+</a>
 </p>
 
 
@@ -167,16 +182,10 @@ I'm usually most active on my Instagram account, where I share my latest work an
 </p>
 
 
-</div>
-
-
 </section>
 
 
-
 </main>
-
-
 
 
 
@@ -189,10 +198,7 @@ I'm usually most active on my Instagram account, where I share my latest work an
 </footer>
 
 
-
-
 <script src="js/gallery.js"></script>
-
 
 </body>
 
