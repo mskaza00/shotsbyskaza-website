@@ -68,8 +68,8 @@ text-decoration:none;
 }
 
 .logo img {
-    width: clamp(30px, 3vw, 55px);
-    height: clamp(30px, 3vw, 55px);
+    width: clamp(45px, 4.5vw, 80px);
+    height: clamp(45px, 4.5vw, 80px);
     object-fit: contain;
 }
 
