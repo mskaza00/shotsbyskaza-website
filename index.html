@@ -1,576 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>ShotsBySkaza | Sports & Portrait Photography</title>
 
-<meta name="description" content="ShotsBySkaza provides professional sports photography, portraits, and event coverage across Western Massachusetts.">
+<meta name="description" content="ShotsBySkaza captures sports, portraits, and unforgettable moments across Western Massachusetts.">
 
-<link rel="icon" href="https://raw.githubusercontent.com/mskaza00/shotsbyskaza-website/main/shotsbyskazalogo.png">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="css/style.css">
 
-<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-
-<style>
-
-:root{
-    --black:#090b0f;
-    --dark:#12161c;
-    --gray:#1d232b;
-    --white:#f5f3ed;
-    --gold:#e8a339;
-    --muted:#a9adb5;
-
-    --display:'Big Shoulders Display',sans-serif;
-    --body:'Work Sans',sans-serif;
-}
-
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-
-
-html{
-    scroll-behavior:smooth;
-}
-
-
-body{
-    background:var(--black);
-    color:var(--white);
-    font-family:var(--body);
-    overflow-x:hidden;
-}
-
-
-img{
-    max-width:100%;
-    display:block;
-}
-
-
-a{
-    color:inherit;
-    text-decoration:none;
-}
-
-
-.container{
-    max-width:1300px;
-    margin:auto;
-    padding:0 30px;
-}
-
-
-/* HEADER */
-
-header{
-    position:fixed;
-    top:0;
-    width:100%;
-    height:80px;
-    z-index:100;
-
-    display:flex;
-    align-items:center;
-
-    background:rgba(9,11,15,.8);
-    backdrop-filter:blur(12px);
-
-    border-bottom:1px solid rgba(255,255,255,.08);
-}
-
-
-.nav{
-    width:100%;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-}
-
-
-.logo{
-    font-family:var(--display);
-    font-size:32px;
-    font-weight:900;
-    text-transform:uppercase;
-}
-
-
-.links{
-    display:flex;
-    gap:35px;
-
-    font-size:14px;
-    letter-spacing:2px;
-    text-transform:uppercase;
-}
-
-
-.links a{
-    color:var(--muted);
-    transition:.25s;
-}
-
-
-.links a:hover{
-    color:var(--gold);
-}
-
-
-/* HERO */
-
-
-.hero{
-
-    min-height:100vh;
-
-    display:flex;
-    align-items:center;
-
-    position:relative;
-
-    padding-top:80px;
-
-}
-
-
-.hero:before{
-
-    content:"";
-
-    position:absolute;
-    inset:0;
-
-    background:
-    radial-gradient(circle at 80% 20%,rgba(232,163,57,.25),transparent 35%),
-    radial-gradient(circle at 10% 80%,rgba(58,86,69,.3),transparent 35%);
-
-}
-
-
-.hero-content{
-
-    position:relative;
-    z-index:2;
-
-}
-
-
-.tag{
-
-    color:var(--gold);
-
-    letter-spacing:4px;
-    text-transform:uppercase;
-
-    font-size:13px;
-
-    margin-bottom:20px;
-
-}
-
-
-.hero h1{
-
-    font-family:var(--display);
-
-    text-transform:uppercase;
-
-    font-size:clamp(60px,9vw,130px);
-
-    line-height:.85;
-
-    max-width:900px;
-
-}
-
-
-.hero h1 span{
-
-    color:var(--gold);
-
-}
-
-
-.hero p{
-
-    max-width:650px;
-
-    color:var(--muted);
-
-    font-size:20px;
-
-    margin-top:30px;
-
-    line-height:1.7;
-
-}
-
-
-.buttons{
-
-    display:flex;
-
-    gap:15px;
-
-    margin-top:40px;
-
-}
-
-
-.button{
-
-    padding:15px 30px;
-
-    text-transform:uppercase;
-
-    letter-spacing:2px;
-
-    font-size:13px;
-
-    font-weight:700;
-
-}
-
-
-.primary{
-
-    background:var(--gold);
-
-    color:#111;
-
-}
-
-
-.secondary{
-
-    border:1px solid rgba(255,255,255,.3);
-
-}
-
-
-
-/* GALLERY */
-
-
-section{
-
-    padding:100px 0;
-
-}
-
-
-.title{
-
-    font-family:var(--display);
-
-    text-transform:uppercase;
-
-    font-size:60px;
-
-}
-
-
-.subtitle{
-
-    color:var(--muted);
-
-    max-width:600px;
-
-    margin-top:15px;
-
-}
-
-
-.gallery{
-
-    margin-top:50px;
-
-    display:grid;
-
-    grid-template-columns:repeat(4,1fr);
-
-    gap:18px;
-
-}
-
-
-.photo{
-
-    position:relative;
-
-    overflow:hidden;
-
-    background:#111;
-
-    aspect-ratio:4/5;
-
-}
-
-
-.photo.wide{
-
-    grid-column:span 2;
-
-    aspect-ratio:16/9;
-
-}
-
-
-.photo img{
-
-    width:100%;
-
-    height:100%;
-
-    object-fit:cover;
-
-    transition:.5s;
-
-}
-
-
-.photo:hover img{
-
-    transform:scale(1.06);
-
-}
-
-
-.overlay{
-
-    position:absolute;
-
-    inset:0;
-
-    background:linear-gradient(
-    transparent,
-    rgba(0,0,0,.7)
-    );
-
-}
-/* ABOUT */
-
-.about{
-
-    background:var(--dark);
-
-}
-
-
-.about-grid{
-
-    display:grid;
-
-    grid-template-columns:1fr 1fr;
-
-    gap:60px;
-
-    align-items:center;
-
-}
-
-
-.about-image{
-
-    aspect-ratio:4/5;
-
-    overflow:hidden;
-
-}
-
-
-.about-image img{
-
-    width:100%;
-
-    height:100%;
-
-    object-fit:cover;
-
-}
-
-
-.about-text p{
-
-    color:var(--muted);
-
-    font-size:18px;
-
-    line-height:1.8;
-
-    margin-top:20px;
-
-}
-
-
-.stats{
-
-    display:flex;
-
-    gap:50px;
-
-    margin-top:40px;
-
-}
-
-
-.stat h3{
-
-    color:var(--gold);
-
-    font-size:40px;
-
-}
-
-
-.stat p{
-
-    font-size:12px;
-
-    text-transform:uppercase;
-
-    letter-spacing:2px;
-
-}
-
-
-
-/* CONTACT */
-
-
-.contact-box{
-
-    margin-top:40px;
-
-    padding:40px;
-
-    border-top:1px solid rgba(255,255,255,.15);
-
-}
-
-
-.email{
-
-    font-size:25px;
-
-    color:var(--gold);
-
-}
-
-
-
-/* FOOTER */
-
-
-footer{
-
-    padding:30px 0;
-
-    border-top:1px solid rgba(255,255,255,.1);
-
-    color:var(--muted);
-
-    text-align:center;
-
-}
-
-
-
-/* MOBILE */
-
-
-@media(max-width:900px){
-
-
-.gallery{
-
-    grid-template-columns:repeat(2,1fr);
-
-}
-
-
-.about-grid{
-
-    grid-template-columns:1fr;
-
-}
-
-
-.hero h1{
-
-    font-size:70px;
-
-}
-
-
-}
-
-
-@media(max-width:600px){
-
-
-.container{
-
-    padding:0 20px;
-
-}
-
-
-.links{
-
-    display:none;
-
-}
-
-
-.gallery{
-
-    grid-template-columns:1fr;
-
-}
-
-
-.photo.wide{
-
-    grid-column:auto;
-
-}
-
-
-.buttons{
-
-    flex-direction:column;
-
-}
-
-
-.stats{
-
-    flex-wrap:wrap;
-
-}
-
-
-.hero h1{
-
-    font-size:55px;
-
-}
-
-
-}
-
-</style>
 
 </head>
 
@@ -580,22 +22,22 @@ footer{
 
 <header>
 
-<div class="container nav">
+<div class="nav">
 
-<a class="logo" href="#top">
+<a class="logo" href="#">
 ShotsBySkaza
 </a>
 
 
-<div class="links">
+<nav>
 
-<a href="#portfolio">Portfolio</a>
+<a href="#gallery">Gallery</a>
 
 <a href="#about">About</a>
 
 <a href="#contact">Contact</a>
 
-</div>
+</nav>
 
 
 </div>
@@ -604,233 +46,66 @@ ShotsBySkaza
 
 
 
-<main id="top">
+<main>
 
 
 <section class="hero">
 
 
-<div class="container hero-content">
-
-
-<div class="tag">
-Sports & Portrait Photography
-</div>
-
-
 <h1>
-
-The moments<br>
-
-that deserve<br>
-
-<span>to be remembered</span>
-
+Capturing<br>
+Moments<br>
+That Last
 </h1>
 
 
 <p>
-
-I capture more than just sports photography. I create high-quality images and graphics that preserve the moments athletes, teams, and clients want to remember forever. From game-day action to personal portraits, every image tells a story.
-
+Sports photography, portraits, and events captured across Western Massachusetts.
 </p>
-
-
-<div class="buttons">
-
-
-<a class="button primary" href="#portfolio">
-View Portfolio
-</a>
-
-
-<a class="button secondary" href="#contact">
-Book A Shoot
-</a>
-
-
-</div>
-
-
-</div>
 
 
 </section>
 
 
 
-<section id="portfolio">
+<section id="gallery">
 
 
-<div class="container">
-
-
-<h2 class="title">
-Portfolio
+<h2>
+Latest Work
 </h2>
 
 
-<p class="subtitle">
+<div id="photo-gallery" class="gallery">
 
-A collection of sports, portraits, and moments captured throughout Western Massachusetts.
-
-</p>
-
-
-
-<div class="gallery">
-
-
-
-<div class="photo wide">
-
-<img src="https://raw.githubusercontent.com/mskaza00/shotsbyskaza-website/main/_F2A6298.jpg">
-
-<div class="overlay"></div>
-
-</div>
-
-
-
-<div class="photo">
-
-<img src="YOUR_IMAGE_LINK_HERE">
-
-<div class="overlay"></div>
-
-</div>
-
-
-
-<div class="photo">
-
-<img src="YOUR_IMAGE_LINK_HERE">
-
-<div class="overlay"></div>
-
-</div>
-
-
-
-<div class="photo">
-
-<img src="YOUR_IMAGE_LINK_HERE">
-
-<div class="overlay"></div>
-
-</div>
-
-
-
-<div class="photo">
-
-<img src="YOUR_IMAGE_LINK_HERE">
-
-<div class="overlay"></div>
-
-</div>
-
-
-
-<div class="photo wide">
-
-<img src="YOUR_IMAGE_LINK_HERE">
-
-<div class="overlay"></div>
-
-</div>
-
-
-
-</div>
-
+<!-- Photos automatically load here -->
 
 </div>
 
 
 </section>
+
+    
 <section id="about" class="about">
 
-<div class="container about-grid">
 
-
-<div class="about-image">
-
-<img src="YOUR_HEADSHOT_LINK_HERE" alt="Matthew Skaza">
-
-</div>
-
-
-
-<div class="about-text">
-
-
-<h2 class="title">
-Behind The Lens
+<h2>
+About ShotsBySkaza
 </h2>
 
 
 <p>
 
-I'm <strong>Matthew Skaza</strong>, the photographer behind ShotsBySkaza. I focus on capturing the moments that define athletes, teams, and people. Whether it is the intensity of competition or the personality behind a portrait, my goal is to create images that last beyond the moment.
+I'm Matthew Skaza, the photographer behind ShotsBySkaza. I capture more than just sports photography. I create high-quality images that preserve the moments athletes, teams, and clients want to remember.
 
 </p>
 
 
 <p>
 
-Based in <strong>Western Massachusetts</strong>, I provide sports coverage, team photography, senior portraits, and event photography for athletes, programs, and clients looking for high-quality images.
+From game-day action to portraits and events, every image is focused on telling a story and capturing the moments people never want to forget.
 
 </p>
-
-
-
-<div class="stats">
-
-
-<div class="stat">
-
-<h3>2+</h3>
-
-<p>
-Years Experience
-</p>
-
-</div>
-
-
-
-<div class="stat">
-
-<h3>20+</h3>
-
-<p>
-Events Covered
-</p>
-
-</div>
-
-
-
-<div class="stat">
-
-<h3>10+</h3>
-
-<p>
-Sports Captured
-</p>
-
-</div>
-
-
-</div>
-
-
-
-</div>
-
-
-</div>
 
 
 </section>
@@ -838,59 +113,34 @@ Sports Captured
 
 
 
-<section id="contact">
+<section id="contact" class="contact">
 
 
-<div class="container">
-
-
-<h2 class="title">
+<h2>
 Contact
 </h2>
 
 
-<p class="subtitle">
-
-Interested in booking photography coverage? Reach out for sports coverage, portraits, events, and more.
-
+<p>
+Interested in booking photography coverage?
 </p>
 
 
-
-<div class="contact-box">
-
-
-<a class="email" href="mailto:mskaza.business@gmail.com">
+<a href="mailto:mskaza.business@gmail.com">
 
 mskaza.business@gmail.com
 
 </a>
 
 
-<p style="margin-top:20px;color:#a9adb5;">
+<br><br>
 
-Instagram:
-<a href="https://instagram.com/shotsbyskaza" style="color:#e8a339;">
+
+<a href="https://instagram.com/shotsbyskaza" target="_blank">
 
 @shotsbyskaza
 
 </a>
-
-</p>
-
-
-<p style="margin-top:10px;color:#a9adb5;">
-
-Western Massachusetts
-
-</p>
-
-
-
-</div>
-
-
-</div>
 
 
 </section>
@@ -901,18 +151,19 @@ Western Massachusetts
 
 
 
+
 <footer>
 
-
-<div class="container">
-
-© 2026 ShotsBySkaza. All Rights Reserved.
-
-</div>
-
+<p>
+© 2026 ShotsBySkaza
+</p>
 
 </footer>
 
+
+
+
+<script src="js/gallery.js"></script>
 
 
 </body>
